@@ -1,8 +1,531 @@
+/* ═══════════════════════════════════════════
+   Valentine Game Night – Pixel Art Theme
+   4-Screen Flow
+   ═══════════════════════════════════════════ */
+
+/* ── Transitions ── */
 .app {
-  opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 0.5s ease;
+}
+.app.fade-in { opacity: 1; }
+.app.fade-out { opacity: 0; }
+
+/* ── Screen (shared base) ── */
+.screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px 40px;
+  overflow: hidden;
+  color: #fce4ec;
+  font-family: 'Press Start 2P', monospace;
 }
 
-.app.loaded {
-  opacity: 1;
+/* ── Polka Dot Overlay ── */
+.polka-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.13) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  z-index: 0;
+}
+
+.screen > *:not(.polka-overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Decorative Lines ── */
+.top-line, .divider-line, .bottom-line {
+  width: 90%; max-width: 620px; height: 4px;
+  background: rgba(255,180,190,0.45); border-radius: 2px;
+}
+.top-line { margin-bottom: 24px; }
+.divider-line { margin: 32px 0; }
+.bottom-line { margin-top: 32px; }
+
+/* ═══════════════════════════════════════════
+   Screen 1 – Landing
+   ═══════════════════════════════════════════ */
+.landing-screen {
+  background: linear-gradient(180deg, #8b1a2b 0%, #b91c3a 25%, #c92a45 50%, #b91c3a 75%, #8b1a2b 100%);
+}
+
+.hearts-row {
+  display: flex; gap: 18px; margin-bottom: 18px;
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
+  line-height: 1.6; letter-spacing: 2px;
+  text-transform: uppercase; color: #fff;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.25);
+  margin-bottom: 28px;
+  display: flex; flex-direction: column;
+  image-rendering: pixelated;
+}
+
+/* Cards */
+.cards-row {
+  display: flex; gap: 18px; justify-content: center; flex-wrap: wrap;
+}
+.card {
+  width: 120px; height: 168px;
+  background: #f5efe6; border-radius: 8px;
+  border: 2px solid #d4c5b0;
+  position: relative; display: flex;
+  align-items: center; justify-content: center;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+  font-family: 'Press Start 2P', monospace;
+  color: #c92a45;
+}
+.card-corner { position: absolute; display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.card-corner.top-left { top: 6px; left: 8px; }
+.card-corner.bottom-right { bottom: 6px; right: 8px; transform: rotate(180deg); }
+.card-rank { font-size: 14px; font-weight: bold; font-family: Georgia, serif; }
+.card-suit { font-size: 12px; }
+.card-center { display: flex; align-items: center; justify-content: center; }
+.card-suit-large { font-size: 48px; }
+
+.card-lucky { background: #c92a45; color: #f5efe6; border-color: #a0172e; }
+.card-inner-border {
+  width: 96px; height: 144px;
+  border: 2px solid rgba(255,255,255,0.35); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lucky-content { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.lucky-text { font-size: 14px; letter-spacing: 2px; font-family: Georgia, serif; font-weight: bold; }
+.lucky-heart { font-size: 22px; margin-top: 4px; }
+
+.eight-grid { display: flex; gap: 6px; }
+.eight-col { display: flex; flex-direction: column; gap: 4px; font-size: 16px; }
+.middle-col { justify-content: center; }
+
+/* Pixel button (landing) */
+.pixel-btn {
+  margin-top: 4px;
+  padding: 14px 40px;
+  background: transparent;
+  border: 3px solid #fff;
+  border-radius: 0;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  image-rendering: pixelated;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+}
+.pixel-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 4px 6px 0 rgba(0,0,0,0.3);
+}
+
+/* ═══════════════════════════════════════════
+   Screen 2 – Ready To Play
+   ═══════════════════════════════════════════ */
+.ready-screen {
+  background: #c92a45;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+}
+
+/* Knit / cross-stitch style border */
+.knit-border {
+  width: 100%;
+  height: 28px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #f5efe6 0px, #f5efe6 6px,
+      transparent 6px, transparent 12px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      #f5efe6 0px, #f5efe6 6px,
+      transparent 6px, transparent 12px
+    );
+  background-size: 12px 12px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+.knit-border.top { position: absolute; top: 0; left: 0; z-index: 2; }
+.knit-border.bottom { position: absolute; bottom: 0; left: 0; z-index: 2; }
+
+.ready-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  padding: 60px 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Score bar */
+.score-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.score-text {
+  font-size: 0.65rem;
+  color: #fff;
+  letter-spacing: 3px;
+}
+
+/* Ready prompt */
+.ready-prompt-box {
+  border: 3px solid #fff;
+  border-radius: 0;
+  padding: 18px 32px;
+  background: rgba(0,0,0,0.08);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,0.15);
+}
+.ready-title {
+  font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+/* Start button */
+.start-btn {
+  padding: 12px 48px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  color: #c92a45;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  transition: all 0.15s;
+  image-rendering: pixelated;
+}
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 6px 0 rgba(0,0,0,0.35);
+  background: #fce4ec;
+}
+
+/* ═══════════════════════════════════════════
+   Screen 3 – Would You Rather
+   ═══════════════════════════════════════════ */
+.game-screen {
+  background: linear-gradient(180deg, #8b1a2b 0%, #b91c3a 30%, #c92a45 60%, #b91c3a 100%);
+  justify-content: center;
+  gap: 20px;
+}
+
+.wyr-badge {
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50px;
+  padding: 10px 36px;
+}
+.wyr-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  color: #fff; letter-spacing: 1px;
+}
+
+.wyr-game {
+  width: 90%; max-width: 620px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 18px;
+}
+
+.question-counter {
+  font-size: 0.55rem; letter-spacing: 2px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+
+.wyr-choices {
+  width: 100%; display: flex;
+  flex-direction: column; align-items: center; gap: 12px;
+}
+
+.wyr-option {
+  width: 100%; display: flex;
+  align-items: center; gap: 14px;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  cursor: pointer; transition: all 0.25s ease;
+  color: #fff; text-align: left;
+  font-family: 'Press Start 2P', monospace;
+}
+.wyr-option:hover:not(:disabled) {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.wyr-option:disabled { cursor: default; }
+
+.option-letter {
+  font-size: 1rem; font-weight: bold;
+  min-width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.15); border-radius: 4px;
+}
+.option-text { font-size: 0.55rem; line-height: 1.8; }
+
+.or-divider { font-size: 0.6rem; color: rgba(255,255,255,0.45); letter-spacing: 4px; }
+
+.wyr-option.chosen {
+  background: rgba(255,255,255,0.22);
+  border-color: #ffcdd2;
+  box-shadow: 0 0 16px rgba(255,180,190,0.3);
+  transform: scale(1.02);
+}
+.wyr-option.not-chosen { opacity: 0.4; transform: scale(0.97); }
+
+.next-btn {
+  margin-top: 8px; padding: 12px 28px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 50px; color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem; cursor: pointer;
+  transition: all 0.25s ease; letter-spacing: 1px;
+}
+.next-btn:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: #fff; transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════
+   Screen 4 – Love Message / Photo (Magazine)
+   ═══════════════════════════════════════════ */
+.love-screen {
+  background: #b91c3a;
+  gap: 14px;
+  padding: 28px 16px 40px;
+  overflow-x: hidden;
+}
+
+/* Meta text at top */
+.love-meta {
+  display: flex; gap: 24px;
+  justify-content: center;
+}
+.love-meta-small {
+  font-family: Georgia, serif;
+  font-size: 0.45rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+
+.love-date {
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
+  color: #fff;
+  letter-spacing: 6px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: normal;
+  text-shadow: none;
+}
+
+/* ── Laptop Mockup ── */
+.laptop-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 8px 0 4px;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Side "LOVE" text */
+.side-text {
+  font-family: Georgia, serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: bold;
+  color: rgba(255,255,255,0.15);
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  writing-mode: vertical-lr;
+  white-space: nowrap;
+  user-select: none;
+}
+.side-text.left  { transform: rotate(180deg); margin-right: -2px; }
+.side-text.right { margin-left: -2px; }
+
+/* Laptop body */
+.laptop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 340px;
+}
+
+/* Laptop screen */
+.laptop-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/11;
+  background: #1a0a0e;
+  border: 3px solid #333;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Photo placeholder inside laptop screen */
+.laptop-photo {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #3a1520 0%, #5a2030 40%, #4a1828 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px;
+}
+.photo-placeholder-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+.photo-placeholder-label {
+  font-family: Georgia, serif;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+}
+
+/* Text overlays on screen */
+.screen-text {
+  position: absolute;
+  color: #fff;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 2;
+}
+.top-text {
+  top: 10%;
+  font-family: Georgia, serif;
+  font-size: clamp(0.6rem, 2.5vw, 1rem);
+  letter-spacing: 6px;
+  font-weight: bold;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+.center-text {
+  font-family: Georgia, serif;
+  font-size: clamp(1rem, 4.5vw, 1.8rem);
+  letter-spacing: 10px;
+  font-weight: bold;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+  opacity: 0.7;
+}
+
+/* Laptop base / keyboard */
+.laptop-base {
+  width: 112%;
+  height: 14px;
+  background: linear-gradient(180deg, #c0c0c0 0%, #a8a8a8 40%, #909090 100%);
+  border-radius: 0 0 4px 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.laptop-keyboard {
+  display: none;
+}
+.laptop-trackpad {
+  width: 28%;
+  height: 4px;
+  background: rgba(0,0,0,0.12);
+  border-radius: 0 0 3px 3px;
+}
+
+/* ── Love Is Section ── */
+.love-is-section {
+  width: 90%; max-width: 380px;
+  display: flex; flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  margin-top: 6px;
+  padding: 20px 10px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+.love-is-title {
+  font-family: Georgia, serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  color: #fff;
+  letter-spacing: 8px;
+  font-weight: bold;
+}
+.love-is-body {
+  font-family: Georgia, serif;
+  font-size: clamp(0.65rem, 2vw, 0.8rem);
+  line-height: 2;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.5px;
+  font-weight: normal;
+}
+
+/* ── Scrolling marquee ── */
+.love-marquee {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 18s linear infinite;
+}
+.marquee-track span {
+  font-family: Georgia, serif;
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Decorative splatter ── */
+.love-splatter {
+  position: absolute;
+  right: 5%;
+  bottom: 18%;
+  opacity: 0.25;
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+
+/* ═══════════════════════ Responsive ═══════════════════════ */
+@media (max-width: 480px) {
+  .card { width: 95px; height: 133px; }
+  .card-suit-large { font-size: 36px; }
+  .card-rank { font-size: 11px; }
+  .card-suit { font-size: 10px; }
+  .lucky-text { font-size: 11px; }
+  .card-inner-border { width: 76px; height: 114px; }
+  .eight-col { font-size: 13px; }
+  .hearts-row svg { width: 40px; height: auto; }
+  .ready-title { letter-spacing: 2px; }
+  .start-btn { padding: 10px 32px; font-size: 0.75rem; }
 }
