@@ -1,0 +1,90 @@
+.valentine-footer {
+  position: relative;
+  padding: 5rem 2rem;
+  background: linear-gradient(
+    180deg,
+    var(--cream),
+    #2d1b2e 30%,
+    #1a0f1a 100%
+  );
+  overflow: hidden;
+  text-align: center;
+}
+
+.footer-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(232, 69, 107, 0.08) 0%,
+    transparent 60%
+  );
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer-heart-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.footer-heart {
+  animation: footerHeartBeat 2s ease-in-out infinite;
+}
+
+.footer-heart.big {
+  font-size: 2.5rem;
+}
+
+.footer-plus,
+.footer-equals {
+  font-family: 'Playfair Display', serif;
+  color: #d4a574;
+  font-size: 1.2rem;
+}
+
+@keyframes footerHeartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.15); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.1); }
+}
+
+.footer-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: #f8bbd0;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+.footer-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d4a574, transparent);
+  margin: 0 auto 1.5rem;
+}
+
+.footer-tagline {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(248, 187, 208, 0.5);
+  margin-bottom: 2rem;
+}
+
+.footer-year {
+  font-family: 'Lora', serif;
+  font-size: 0.8rem;
+  color: rgba(212, 165, 116, 0.4);
+  letter-spacing: 0.2em;
+}

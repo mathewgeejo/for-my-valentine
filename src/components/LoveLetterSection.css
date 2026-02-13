@@ -1,0 +1,130 @@
+.love-letter-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--light-pink) 50%, var(--cream) 100%);
+  overflow: hidden;
+}
+
+.love-letter-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--rose) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, var(--rose) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, var(--deep-rose) 1px, transparent 1px);
+  background-size: 60px 60px, 80px 80px, 100px 100px;
+}
+
+.love-letter-container {
+  position: relative;
+  max-width: 650px;
+  width: 100%;
+  perspective: 1000px;
+}
+
+.letter-seal {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3.5rem;
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  animation: sealFloat 3s ease-in-out infinite;
+}
+
+@keyframes sealFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+.letter-paper {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #fffbf5 0%,
+    #fff8f0 50%,
+    #fef5eb 100%
+  );
+  border-radius: 12px;
+  padding: 4rem 3.5rem 3rem;
+  box-shadow:
+    0 20px 60px rgba(74, 25, 66, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(212, 165, 116, 0.2);
+}
+
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+  border-radius: 12px 12px 0 0;
+}
+
+.letter-decoration {
+  position: absolute;
+  color: var(--gold);
+  font-size: 1.2rem;
+  opacity: 0.4;
+}
+
+.letter-decoration.top-left { top: 1rem; left: 1.5rem; }
+.letter-decoration.top-right { top: 1rem; right: 1.5rem; }
+.letter-decoration.bottom-left { bottom: 1rem; left: 1.5rem; }
+.letter-decoration.bottom-right { bottom: 1rem; right: 1.5rem; }
+
+.letter-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  color: var(--deep-rose);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.letter-body {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: var(--dark);
+}
+
+.letter-body p {
+  margin-bottom: 1.5rem;
+  text-indent: 2rem;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--deep-rose);
+  text-align: right;
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .letter-paper {
+    padding: 3rem 2rem 2rem;
+  }
+  
+  .letter-greeting {
+    font-size: 2.2rem;
+  }
+  
+  .letter-body {
+    font-size: 1rem;
+  }
+}

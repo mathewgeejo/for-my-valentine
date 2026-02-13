@@ -1,0 +1,8 @@
+.app {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.app.loaded {
+  opacity: 1;
+}
