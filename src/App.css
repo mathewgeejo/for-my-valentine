@@ -516,6 +516,71 @@
   pointer-events: none;
 }
 
+/* Love screen next button */
+.love-next-btn {
+  margin-top: 24px;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════
+   Screen 5 – Gallery (Infinite 3D Menu)
+   ═══════════════════════════════════════════ */
+
+.gallery-screen {
+  background: linear-gradient(135deg, #1a0011 0%, #2d0a1e 40%, #1a0a2e 100%);
+  padding: 0;
+  justify-content: center;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.gallery-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  margin-bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.gallery-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.1rem;
+  color: #ffb6c1;
+  text-shadow: 0 0 12px rgba(232,69,107,0.5);
+  letter-spacing: 2px;
+}
+
+.gallery-canvas-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.gallery-hint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: rgba(255,182,193,0.5);
+  letter-spacing: 2px;
+  animation: hintPulse 2s ease-in-out infinite;
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
 /* ═══════════════════════ Responsive ═══════════════════════ */
 @media (max-width: 480px) {
   .card { width: 95px; height: 133px; }
@@ -528,4 +593,6 @@
   .hearts-row svg { width: 40px; height: auto; }
   .ready-title { letter-spacing: 2px; }
   .start-btn { padding: 10px 32px; font-size: 0.75rem; }
+  .gallery-title { font-size: 0.8rem; }
+  .gallery-canvas-wrap { min-height: unset; }
 }

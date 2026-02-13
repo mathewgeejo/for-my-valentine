@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import InfiniteMenu from './components/InfiniteMenu'
 
 /* ═══════════════════════════════════════════
    Pixel Art Helpers
@@ -281,7 +282,7 @@ function GameScreen({ onFinish }) {
    Screen 4 – Love Message / Photo Page
    ═══════════════════════════════════════════ */
 
-function LoveScreen() {
+function LoveScreen({ onNext }) {
   return (
     <div className="screen love-screen">
       {/* Top meta text */}
@@ -339,10 +340,50 @@ function LoveScreen() {
         </div>
       </div>
 
+      {/* Continue button */}
+      <button className="pixel-btn love-next-btn" onClick={onNext}>
+        Our Memories ♥
+      </button>
+
       {/* Decorative splatter */}
       <div className="love-splatter">
         <PixelHeart size={60} color="#e8456b" />
       </div>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════
+   Screen 5 – Gallery (Infinite 3D Menu)
+   ═══════════════════════════════════════════ */
+
+const galleryItems = [
+  { image: 'https://picsum.photos/seed/val1/900/900', link: '#', title: 'Us', description: 'Our first photo together' },
+  { image: 'https://picsum.photos/seed/val2/900/900', link: '#', title: 'Date Night', description: 'That perfect evening' },
+  { image: 'https://picsum.photos/seed/val3/900/900', link: '#', title: 'Adventure', description: 'Exploring together' },
+  { image: 'https://picsum.photos/seed/val4/900/900', link: '#', title: 'Laughs', description: 'You make me smile' },
+  { image: 'https://picsum.photos/seed/val5/900/900', link: '#', title: 'Sunset', description: 'Golden hour with you' },
+  { image: 'https://picsum.photos/seed/val6/900/900', link: '#', title: 'Home', description: 'Cozy nights in' },
+  { image: 'https://picsum.photos/seed/val7/900/900', link: '#', title: 'Travel', description: 'Our favorite trip' },
+  { image: 'https://picsum.photos/seed/val8/900/900', link: '#', title: 'Forever', description: 'Always & forever' },
+]
+
+function GalleryScreen() {
+  return (
+    <div className="screen gallery-screen">
+      <div className="polka-overlay" />
+
+      <div className="gallery-header">
+        <PixelHeart size={32} color="#e8456b" />
+        <h2 className="gallery-title">Our Memories</h2>
+        <PixelHeart size={32} color="#e8456b" />
+      </div>
+
+      <div className="gallery-canvas-wrap">
+        <InfiniteMenu items={galleryItems} />
+      </div>
+
+      <p className="gallery-hint">drag to spin the globe ♥</p>
     </div>
   )
 }
@@ -368,7 +409,8 @@ function App() {
       {screen === 'landing' && <LandingScreen onNext={() => goTo('ready')} />}
       {screen === 'ready' && <ReadyScreen onStart={() => goTo('game')} />}
       {screen === 'game' && <GameScreen onFinish={() => goTo('love')} />}
-      {screen === 'love' && <LoveScreen />}
+      {screen === 'love' && <LoveScreen onNext={() => goTo('gallery')} />}
+      {screen === 'gallery' && <GalleryScreen />}
     </div>
   )
 }
