@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import InfiniteMenu from './components/InfiniteMenu'
+import ValentineCard from './components/ValentineCard'
 
 /* ═══════════════════════════════════════════
    Pixel Art Helpers
@@ -292,29 +293,35 @@ function LoveScreen({ onNext }) {
       </div>
       <div className="love-date">14/02/26</div>
 
-      {/* ── Laptop Mockup ── */}
+      {/* ── Pixel Art Laptop Mockup ── */}
       <div className="laptop-wrapper">
         {/* Side text */}
         <span className="side-text left">LOVE</span>
 
-        <div className="laptop">
+        <div className="pixel-laptop">
+          {/* Top bezel with camera dot */}
+          <div className="pixel-laptop-bezel-top">
+            <div className="pixel-cam-dot" />
+          </div>
           {/* Screen */}
-          <div className="laptop-screen">
+          <div className="pixel-laptop-screen">
             {/* Overlaid text */}
             <span className="screen-text top-text">MY VALENTINE</span>
             <span className="screen-text center-text">BOUNDLESS</span>
-
-            {/* Dummy photo placeholder */}
-            <div className="laptop-photo">
-              <span className="photo-placeholder-icon">📷</span>
-              <span className="photo-placeholder-label">Photo goes here</span>
+            {/* Real photo */}
+            <img src="/photos/photo1.jpg" alt="Us" className="laptop-real-photo" />
+          </div>
+          {/* Bottom bezel */}
+          <div className="pixel-laptop-bezel-bottom" />
+          {/* Keyboard base */}
+          <div className="pixel-laptop-base">
+            <div className="pixel-keyboard-grid">
+              {[...Array(30)].map((_, i) => <div key={i} className="pixel-key" />)}
             </div>
+            <div className="pixel-trackpad" />
           </div>
-          {/* Keyboard / base */}
-          <div className="laptop-base">
-            <div className="laptop-keyboard" />
-            <div className="laptop-trackpad" />
-          </div>
+          {/* Bottom lip */}
+          <div className="pixel-laptop-lip" />
         </div>
 
         <span className="side-text right">LOVE</span>
@@ -358,17 +365,21 @@ function LoveScreen({ onNext }) {
    ═══════════════════════════════════════════ */
 
 const galleryItems = [
-  { image: 'https://picsum.photos/seed/val1/900/900', link: '#', title: 'Us', description: 'Our first photo together' },
-  { image: 'https://picsum.photos/seed/val2/900/900', link: '#', title: 'Date Night', description: 'That perfect evening' },
-  { image: 'https://picsum.photos/seed/val3/900/900', link: '#', title: 'Adventure', description: 'Exploring together' },
-  { image: 'https://picsum.photos/seed/val4/900/900', link: '#', title: 'Laughs', description: 'You make me smile' },
-  { image: 'https://picsum.photos/seed/val5/900/900', link: '#', title: 'Sunset', description: 'Golden hour with you' },
-  { image: 'https://picsum.photos/seed/val6/900/900', link: '#', title: 'Home', description: 'Cozy nights in' },
-  { image: 'https://picsum.photos/seed/val7/900/900', link: '#', title: 'Travel', description: 'Our favorite trip' },
-  { image: 'https://picsum.photos/seed/val8/900/900', link: '#', title: 'Forever', description: 'Always & forever' },
+  { image: '/photos/photo2.jpg', link: '#', title: 'Camera Roll', description: 'Through the lens' },
+  { image: '/photos/photo3.jpg', link: '#', title: 'Your Eyes', description: 'I get lost in them' },
+  { image: '/photos/photo4.jpg', link: '#', title: 'Our Figurines', description: 'Made with love' },
+  { image: '/photos/photo5.jpg', link: '#', title: 'Beautiful You', description: 'Stunning as always' },
+  { image: '/photos/photo6.jpg', link: '#', title: 'Cutie', description: 'My adorable crab' },
+  { image: '/photos/photo7.jpg', link: '#', title: 'Together', description: 'Purple lights, warm hearts' },
+  { image: '/photos/photo8.jpg', link: '#', title: 'Us', description: 'My favorite person' },
+  { image: '/photos/photo9.jpg', link: '#', title: 'Memories', description: 'Every moment counts' },
+  { image: '/photos/photo10.jpg', link: '#', title: 'Adventures', description: 'Exploring together' },
+  { image: '/photos/photo11.jpg', link: '#', title: 'Smiles', description: 'You light up my world' },
+  { image: '/photos/photo12.jpg', link: '#', title: 'Forever', description: 'Always & forever' },
+  { image: '/photos/photo13.jpg', link: '#', title: 'Love', description: 'My everything' },
 ]
 
-function GalleryScreen() {
+function GalleryScreen({ onNext }) {
   return (
     <div className="screen gallery-screen">
       <div className="polka-overlay" />
@@ -384,6 +395,10 @@ function GalleryScreen() {
       </div>
 
       <p className="gallery-hint">drag to spin the globe ♥</p>
+
+      <button className="pixel-btn gallery-next-btn" onClick={onNext}>
+        Continue ♥
+      </button>
     </div>
   )
 }
@@ -410,7 +425,8 @@ function App() {
       {screen === 'ready' && <ReadyScreen onStart={() => goTo('game')} />}
       {screen === 'game' && <GameScreen onFinish={() => goTo('love')} />}
       {screen === 'love' && <LoveScreen onNext={() => goTo('gallery')} />}
-      {screen === 'gallery' && <GalleryScreen />}
+      {screen === 'gallery' && <GalleryScreen onNext={() => goTo('valentine')} />}
+      {screen === 'valentine' && <ValentineCard />}
     </div>
   )
 }
